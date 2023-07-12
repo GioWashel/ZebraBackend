@@ -2,30 +2,19 @@ package com.zebra.entity;
 
 import jakarta.persistence.*;
 
-import javax.swing.*;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-    @Column(name = "email")
+
     private String email;
-    @Column(name = "password")
+
     private String password;
-    @Column(name = "salt")
-    private String salt;
-    @Column(name = "created")
-    private Timestamp dateCreated;
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }

@@ -4,10 +4,13 @@ package com.zebra.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name= "csv")
 public class Csv {
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
+
     private Long userID;
 
     public void setUserID(Long userID) {
