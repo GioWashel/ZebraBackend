@@ -12,11 +12,11 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private String description;
     private BigDecimal amount;
     private String category;
-    private Long csvID;
+    private long csvID;
     public Transaction() {}
     public Transaction(Long id, String description, BigDecimal amount, String category, Long csvID) {
         this.id = id;
@@ -52,7 +52,7 @@ public class Transaction {
         this.category = category;
     }
 
-    public Long getCsvID() {
+    public long getCsvID() {
         return csvID;
     }
 
@@ -60,7 +60,7 @@ public class Transaction {
         this.csvID = csvID;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

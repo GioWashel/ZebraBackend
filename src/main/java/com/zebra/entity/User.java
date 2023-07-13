@@ -6,8 +6,10 @@ import jakarta.persistence.*;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
+    @SequenceGenerator(name = "USER_ID_GEN" , sequenceName = "USER_ID_GEN", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_ID_GEN")
+    private int id;
 
     private String email;
 
@@ -24,7 +26,7 @@ public class User {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -9,14 +9,14 @@ public class Csv {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Long id;
+    private long id;
 
-    private Long userID;
+    private int userID;
 
-    public void setUserID(Long userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
-    public Long getUserID() {
+    public int getUserID() {
         return this.userID;
     }
     public void setId(Long id) {

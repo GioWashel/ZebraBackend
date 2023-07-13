@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
+@CrossOrigin
 public class UserController {
 
     private UserService userService;
@@ -18,7 +19,7 @@ public class UserController {
     }
 
     //when user submits form for creating a profile, create a user.
-    @PostMapping
+    @PostMapping("/signup")
     String newUser(@RequestBody User user) {
         if(userService.userExists(user)) {
             return "error, user already exists, try logging in?";
