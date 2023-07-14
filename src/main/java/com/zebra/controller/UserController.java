@@ -4,6 +4,8 @@ package com.zebra.controller;
 import com.zebra.entity.User;
 import com.zebra.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,29 +22,26 @@ public class UserController {
 
     //when user submits form for creating a profile, create a user.
     @PostMapping("/signup")
-    String newUser(@RequestBody User user) {
+    ResponseEntity<User> newUser(@RequestBody User user) {
         if(userService.userExists(user)) {
-            return "error, user already exists, try logging in?";
+            throw new RuntimeException("user already exists, try logging in?");
         }
-        else {
-            User freshUser = userService.createUser(user);
-            return "user created";
-        }
-
+        User freshUser = userService.createUser(user);
+        return new ResponseEntity<User>(freshUser, HttpStatus.CREATED);
     }
     //when user wants to login, get user
-    @GetMapping
-    String getUser(@RequestBody User user)   {
+    @GetMapping("/login")
+    ResponseEntity<User> getUser(@RequestBody User user)   {
 
         //check if user exists
         if(userService.userExists(user)) {
             User foundUser = userService.getUser(user);
             //if passwords don't match, don't give user, else send user
             if(!foundUser.getPassword().equals(user.getPassword())) {
-                return "incorrect password :/";
+                throw new RuntimeException("incorrect password :/");
             }
-            return "user found!";
+            return new ResponseEntity<User>(foundUser, HttpStatus.CREATED);
         }
-        return "user not found!";
+        throw new RuntimeException("user not found");
     }
 }

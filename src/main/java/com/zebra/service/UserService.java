@@ -3,7 +3,6 @@ package com.zebra.service;
 import com.zebra.entity.User;
 import com.zebra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 
@@ -40,8 +39,8 @@ public class UserService implements UserServiceInterface {
         return userRepository.save(user);
     }
     @Override
-    public boolean userExists(User user) {
-        //check if user id is already in system
-        return userRepository.existsById(user.getId());
+    public Boolean userExists(User user) {
+        //get the user, if email is null, no user exists, else user exists.
+        return !userRepository.findByEmail(user.getEmail()).isEmpty();
     }
 }

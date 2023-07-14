@@ -7,6 +7,6 @@ public interface UserServiceInterface {
     public void deleteUser(User user);
     public User updateUserEmail(User user, String email);
     public User updateUserPassword(User user, String password);
-    public boolean userExists(User user);
+    public Boolean userExists(User user);
 
 }

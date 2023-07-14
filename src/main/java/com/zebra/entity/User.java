@@ -9,7 +9,7 @@ public class User {
 
     @SequenceGenerator(name = "USER_ID_GEN" , sequenceName = "USER_ID_GEN", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_ID_GEN")
-    private int id;
+    private long id;
 
     private String email;
 
