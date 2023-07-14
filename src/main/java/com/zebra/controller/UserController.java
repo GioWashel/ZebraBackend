@@ -24,24 +24,22 @@ public class UserController {
     @PostMapping("/signup")
     ResponseEntity<User> newUser(@RequestBody User user) {
         if(userService.userExists(user)) {
-            throw new RuntimeException("user already exists, try logging in?");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         User freshUser = userService.createUser(user);
         return new ResponseEntity<User>(freshUser, HttpStatus.CREATED);
     }
     //when user wants to login, get user
     @GetMapping("/login")
-    ResponseEntity<User> getUser(@RequestBody User user)   {
+    ResponseEntity<User> getUser(@RequestBody User user) {
 
         //check if user exists
-        if(userService.userExists(user)) {
+        if (userService.userExists(user)) {
             User foundUser = userService.getUser(user);
-            //if passwords don't match, don't give user, else send user
-            if(!foundUser.getPassword().equals(user.getPassword())) {
-                throw new RuntimeException("incorrect password :/");
-            }
             return new ResponseEntity<User>(foundUser, HttpStatus.CREATED);
+
+            //if passwords don't match, don't give user, else send user
         }
-        throw new RuntimeException("user not found");
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

@@ -20,7 +20,7 @@ public class UserService implements UserServiceInterface {
         return userRepository.save(user);
     }
     public User getUser(User user) {
-        return userRepository.getReferenceById(user.getId());
+        return userRepository.findByEmail(user.getEmail()).get(0);
     }
     @Override
     public void deleteUser(User user) {
