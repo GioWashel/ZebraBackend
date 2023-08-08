@@ -5,6 +5,8 @@ import com.zebra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UserService implements UserServiceInterface {
@@ -20,7 +22,7 @@ public class UserService implements UserServiceInterface {
         return userRepository.save(user);
     }
     public User getUser(User user) {
-        return userRepository.findByEmail(user.getEmail()).get(0);
+        return userRepository.findByEmail(user.getEmail()).get();
     }
     @Override
     public void deleteUser(User user) {
@@ -41,6 +43,16 @@ public class UserService implements UserServiceInterface {
     @Override
     public Boolean userExists(User user) {
         //get the user, if email is null, no user exists, else user exists.
-        return !userRepository.findByEmail(user.getEmail()).isEmpty();
+        if(findByEmail(user.getEmail()) == null) return false;
+        return true;
+    }
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+    @Override
+    public User findByEmail(String email) {
+        if(userRepository.findByEmail(email) != null) return userRepository.findByEmail(email).get();
+        return null;
     }
 }

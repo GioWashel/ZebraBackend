@@ -11,6 +11,8 @@ public class Csv {
 
     private long id;
 
+    private boolean hasData;
+
     private int userID;
 
     public void setUserID(int userID) {
@@ -26,4 +28,6 @@ public class Csv {
     public Long getId() {
         return id;
     }
+
+
 }
